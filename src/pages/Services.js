@@ -13,8 +13,17 @@ import {
   Target,
   Code,
   Palette,
-  Server
+  Server,
+  Star,
+  Award,
+  Clock
 } from 'lucide-react';
+import ParticleBackground from '../components/ParticleBackground';
+import GradientText from '../components/GradientText';
+import { FloatingOrbs, AnimatedGrid, AnimatedTextReveal, PremiumCard, AnimatedDivider, AnimatedCounter } from '../components/PremiumEffects';
+import { PremiumBackground } from '../components/EnhancedBackground';
+import PremiumButton, { GlowButton, NeonButton } from '../components/PremiumButton';
+import PremiumDivider from '../components/PremiumDivider';
 
 const Services = () => {
   const [activeTab, setActiveTab] = useState('all');
@@ -134,27 +143,32 @@ const Services = () => {
     {
       icon: Target,
       title: 'Discovery',
-      description: 'We analyze your requirements and understand your business goals'
+      description: 'We analyze your requirements and understand your business goals',
+      color: 'from-blue-500 to-cyan-500'
     },
     {
       icon: Palette,
       title: 'Design',
-      description: 'Create wireframes and design mockups for your approval'
+      description: 'Create wireframes and design mockups for your approval',
+      color: 'from-purple-500 to-pink-500'
     },
     {
       icon: Code,
       title: 'Development',
-      description: 'Build your solution using the latest technologies and best practices'
+      description: 'Build your solution using the latest technologies and best practices',
+      color: 'from-green-500 to-emerald-500'
     },
     {
       icon: Zap,
       title: 'Testing',
-      description: 'Rigorous testing to ensure quality and performance'
+      description: 'Rigorous testing to ensure quality and performance',
+      color: 'from-yellow-500 to-orange-500'
     },
     {
       icon: Server,
       title: 'Deployment',
-      description: 'Deploy your solution with proper monitoring and support'
+      description: 'Deploy your solution with proper monitoring and support',
+      color: 'from-red-500 to-pink-500'
     }
   ];
 
@@ -207,23 +221,32 @@ const Services = () => {
     }
   ];
 
+  const stats = [
+    { icon: Users, number: "500+", label: "Happy Clients", color: "from-blue-500 to-cyan-500" },
+    { icon: Award, number: "50+", label: "Projects Completed", color: "from-purple-500 to-pink-500" },
+    { icon: Clock, number: "5+", label: "Years Experience", color: "from-green-500 to-emerald-500" },
+    { icon: Star, number: "99%", label: "Client Satisfaction", color: "from-yellow-500 to-orange-500" }
+  ];
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1
+        staggerChildren: 0.2,
+        delayChildren: 0.1
       }
     }
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 30 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.6
+        duration: 0.6,
+        ease: "easeOut"
       }
     }
   };
@@ -231,39 +254,127 @@ const Services = () => {
   const filteredServices = activeTab === 'all' ? services : services.filter(service => service.id === activeTab);
 
   return (
-    <div className="min-h-screen pt-20">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-indigo-900 custom-scrollbar">
+      {/* Premium Background Effects */}
+      <PremiumBackground />
+      <FloatingOrbs />
+      <AnimatedGrid />
+      
       {/* Hero Section */}
-      <section className="section-padding bg-gradient-to-br from-primary-50 to-secondary-50">
-        <div className="container-custom">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center max-w-4xl mx-auto"
-          >
-            <h1 className="text-5xl md:text-6xl font-bold mb-6">
-              Our <span className="gradient-text">Services</span>
-            </h1>
-            <p className="text-xl text-gray-600 mb-8">
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+        <ParticleBackground />
+        <div className="absolute inset-0 bg-pattern opacity-30"></div>
+        
+        {/* Enhanced floating elements */}
+        <motion.div
+          animate={{
+            y: [0, -20, 0],
+            rotate: [0, 5, 0]
+          }}
+          transition={{
+            duration: 6,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+          className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-full blur-2xl"
+        />
+        
+        <motion.div
+          animate={{
+            y: [0, 30, 0],
+            rotate: [0, -5, 0]
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+          className="absolute bottom-20 right-10 w-40 h-40 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-full blur-3xl"
+        />
+        
+        <div className="relative z-10 container-custom text-center text-white">
+          <AnimatedTextReveal delay={0.2} className="mb-8">
+            <motion.div
+              initial={{ scale: 0, rotate: -180 }}
+              animate={{ scale: 1, rotate: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="inline-block p-4 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-full backdrop-blur-md border border-white/20 mb-6"
+            >
+              <Zap className="w-12 h-12 text-blue-400" />
+            </motion.div>
+            <motion.h1 
+              className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6"
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.3 }}
+            >
+              Our <GradientText className="text-5xl md:text-7xl lg:text-8xl">Services</GradientText>
+            </motion.h1>
+            <p className="text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
               Comprehensive IT solutions tailored to meet your business needs and drive digital transformation.
             </p>
+          </AnimatedTextReveal>
+        </div>
+      </section>
+
+      {/* Stats Section */}
+      <section className="section-padding bg-gradient-to-r from-black/40 to-transparent">
+        <div className="container-custom">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+              Trusted by <GradientText className="text-4xl md:text-5xl">500+ Companies</GradientText>
+            </h2>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              Our track record speaks for itself. Join hundreds of satisfied clients who have transformed their businesses with us.
+            </p>
+          </motion.div>
+
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="grid grid-cols-2 md:grid-cols-4 gap-8"
+          >
+            {stats.map((stat, index) => (
+              <motion.div
+                key={stat.label}
+                variants={itemVariants}
+                className="text-center group"
+              >
+                <div className={`p-6 rounded-2xl bg-gradient-to-r ${stat.color} bg-opacity-20 backdrop-blur-md border border-white/10 group-hover:scale-105 transition-transform duration-300 mb-4`}>
+                  <stat.icon className="w-12 h-12 text-white mx-auto mb-4" />
+                  <div className="text-3xl md:text-4xl font-bold text-white mb-2">
+                    <AnimatedCounter end={parseInt(stat.number)} className="text-3xl md:text-4xl font-bold text-white" />
+                  </div>
+                  <div className="text-gray-300 font-medium">
+                    {stat.label}
+                  </div>
+                </div>
+              </motion.div>
+            ))}
           </motion.div>
         </div>
       </section>
 
       {/* Service Categories */}
-      <section className="section-padding">
+      <section className="section-padding bg-gradient-to-b from-transparent to-black/20">
+        <PremiumDivider variant="gradient" />
         <div className="container-custom">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              Choose Your <span className="gradient-text">Service</span>
+          <AnimatedTextReveal className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+              Choose Your <GradientText className="text-4xl md:text-5xl">Service</GradientText>
             </h2>
-          </motion.div>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              Browse our comprehensive range of IT services designed to accelerate your business growth
+            </p>
+          </AnimatedTextReveal>
 
           {/* Filter Tabs */}
           <div className="flex flex-wrap justify-center gap-4 mb-12">
@@ -279,10 +390,10 @@ const Services = () => {
               <motion.button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`px-6 py-3 rounded-lg font-medium transition-all duration-300 ${
+                className={`px-6 py-3 rounded-lg font-medium transition-all duration-300 backdrop-blur-md border ${
                   activeTab === tab.id
-                    ? 'bg-gradient-to-r from-primary-600 to-secondary-600 text-white shadow-lg'
-                    : 'bg-white text-gray-600 hover:bg-gray-50 border border-gray-200'
+                    ? 'bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-white border-white/20 shadow-lg'
+                    : 'bg-white/5 text-gray-300 hover:bg-white/10 border-white/10 hover:border-white/20'
                 }`}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -297,6 +408,7 @@ const Services = () => {
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
+            viewport={{ once: true }}
             className="grid grid-cols-1 lg:grid-cols-2 gap-8"
           >
             {filteredServices.map((service, index) => (
@@ -305,7 +417,7 @@ const Services = () => {
                 variants={itemVariants}
                 className="group"
               >
-                <div className="glass-effect rounded-2xl overflow-hidden card-hover">
+                <PremiumCard className="overflow-hidden">
                   <div className="relative h-48 overflow-hidden">
                     <img
                       src={service.image}
@@ -319,28 +431,28 @@ const Services = () => {
                   </div>
                   
                   <div className="p-8">
-                    <h3 className="text-2xl font-bold mb-3">{service.title}</h3>
-                    <p className="text-gray-600 mb-6">{service.description}</p>
+                    <h3 className="text-2xl font-bold mb-3 text-white group-hover:text-blue-400 transition-colors">{service.title}</h3>
+                    <p className="text-gray-300 mb-6">{service.description}</p>
                     
                     <div className="mb-6">
-                      <h4 className="font-semibold mb-3">Key Features:</h4>
+                      <h4 className="font-semibold mb-3 text-white">Key Features:</h4>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                         {service.features.map((feature, idx) => (
                           <div key={idx} className="flex items-center space-x-2">
-                            <CheckCircle className="text-green-500" size={16} />
-                            <span className="text-sm text-gray-600">{feature}</span>
+                            <CheckCircle className="text-green-400" size={16} />
+                            <span className="text-sm text-gray-300">{feature}</span>
                           </div>
                         ))}
                       </div>
                     </div>
 
                     <div className="mb-6">
-                      <h4 className="font-semibold mb-3">Technologies:</h4>
+                      <h4 className="font-semibold mb-3 text-white">Technologies:</h4>
                       <div className="flex flex-wrap gap-2">
                         {service.technologies.map((tech, idx) => (
                           <span
                             key={idx}
-                            className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm"
+                            className="px-3 py-1 bg-white/10 text-gray-300 rounded-full text-sm backdrop-blur-md border border-white/10"
                           >
                             {tech}
                           </span>
@@ -348,12 +460,15 @@ const Services = () => {
                       </div>
                     </div>
 
-                    <button className="btn-primary w-full">
+                    <GlowButton
+                      icon={<ArrowRight className="w-5 h-5" />}
+                      size="md"
+                      className="w-full"
+                    >
                       Learn More
-                      <ArrowRight className="ml-2 inline" size={20} />
-                    </button>
+                    </GlowButton>
                   </div>
-                </div>
+                </PremiumCard>
               </motion.div>
             ))}
           </motion.div>
@@ -361,43 +476,42 @@ const Services = () => {
       </section>
 
       {/* Process Section */}
-      <section className="section-padding bg-gray-50">
+      <section className="section-padding bg-gradient-to-r from-black/40 to-transparent">
+        <PremiumDivider variant="neon" />
         <div className="container-custom">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              Our <span className="gradient-text">Process</span>
+          <AnimatedTextReveal className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+              Our <GradientText className="text-4xl md:text-5xl">Process</GradientText>
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
               We follow a proven methodology to deliver exceptional results for every project.
             </p>
-          </motion.div>
+          </AnimatedTextReveal>
 
           <motion.div
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
+            viewport={{ once: true }}
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8"
           >
             {processSteps.map((step, index) => (
               <motion.div
                 key={index}
                 variants={itemVariants}
-                className="text-center relative"
+                className="text-center relative group"
               >
                 {index < processSteps.length - 1 && (
-                  <div className="hidden lg:block absolute top-8 left-full w-full h-0.5 bg-gradient-to-r from-primary-500 to-secondary-500 z-0"></div>
+                  <div className="hidden lg:block absolute top-8 left-full w-full h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 z-0"></div>
                 )}
                 <div className="relative z-10">
-                  <div className="w-16 h-16 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <step.icon className="text-white" size={28} />
-                  </div>
-                  <h3 className="text-lg font-semibold mb-2">{step.title}</h3>
-                  <p className="text-gray-600 text-sm">{step.description}</p>
+                  <PremiumCard className="group-hover:scale-105 transition-transform duration-300">
+                    <div className={`w-16 h-16 bg-gradient-to-r ${step.color} rounded-full flex items-center justify-center mx-auto mb-4`}>
+                      <step.icon className="text-white" size={28} />
+                    </div>
+                    <h3 className="text-lg font-semibold mb-2 text-white">{step.title}</h3>
+                    <p className="text-gray-300 text-sm">{step.description}</p>
+                  </PremiumCard>
                 </div>
               </motion.div>
             ))}
@@ -406,26 +520,23 @@ const Services = () => {
       </section>
 
       {/* Pricing Section */}
-      <section className="section-padding">
+      <section className="section-padding bg-gradient-to-b from-transparent to-black/20">
+        <PremiumDivider variant="gradient" />
         <div className="container-custom">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              Pricing <span className="gradient-text">Plans</span>
+          <AnimatedTextReveal className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+              Pricing <GradientText className="text-4xl md:text-5xl">Plans</GradientText>
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
               Choose the perfect plan that fits your business needs and budget.
             </p>
-          </motion.div>
+          </AnimatedTextReveal>
 
           <motion.div
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
+            viewport={{ once: true }}
             className="grid grid-cols-1 md:grid-cols-3 gap-8"
           >
             {pricingPlans.map((plan, index) => (
@@ -436,37 +547,37 @@ const Services = () => {
               >
                 {plan.popular && (
                   <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                    <span className="bg-gradient-to-r from-primary-500 to-secondary-500 text-white px-4 py-2 rounded-full text-sm font-medium">
+                    <span className="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-4 py-2 rounded-full text-sm font-medium">
                       Most Popular
                     </span>
                   </div>
                 )}
-                <div className="glass-effect rounded-2xl p-8 h-full">
+                <PremiumCard className="h-full">
                   <div className="text-center mb-8">
-                    <h3 className="text-2xl font-bold mb-4">{plan.name}</h3>
+                    <h3 className="text-2xl font-bold mb-4 text-white">{plan.name}</h3>
                     <div className="mb-2">
-                      <span className="text-4xl font-bold">{plan.price}</span>
-                      <span className="text-gray-600 ml-2">{plan.duration}</span>
+                      <span className="text-4xl font-bold text-white">{plan.price}</span>
+                      <span className="text-gray-300 ml-2">{plan.duration}</span>
                     </div>
                   </div>
                   
                   <ul className="space-y-4 mb-8">
                     {plan.features.map((feature, idx) => (
                       <li key={idx} className="flex items-center space-x-3">
-                        <CheckCircle className="text-green-500" size={20} />
-                        <span className="text-gray-600">{feature}</span>
+                        <CheckCircle className="text-green-400" size={20} />
+                        <span className="text-gray-300">{feature}</span>
                       </li>
                     ))}
                   </ul>
                   
-                  <button className={`w-full py-3 px-6 rounded-lg font-medium transition-all duration-300 ${
-                    plan.popular
-                      ? 'bg-gradient-to-r from-primary-600 to-secondary-600 text-white hover:shadow-lg'
-                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                  }`}>
+                  <GlowButton
+                    icon={<ArrowRight className="w-5 h-5" />}
+                    size="md"
+                    className="w-full"
+                  >
                     Get Started
-                  </button>
-                </div>
+                  </GlowButton>
+                </PremiumCard>
               </motion.div>
             ))}
           </motion.div>
@@ -474,28 +585,32 @@ const Services = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="section-padding bg-gradient-to-r from-gray-900 to-gray-800">
+      <section className="section-padding bg-gradient-to-r from-blue-600/20 to-purple-600/20">
+        <PremiumDivider variant="neon" />
         <div className="container-custom text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
+          <AnimatedTextReveal className="max-w-4xl mx-auto">
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              Ready to Get Started?
+              Ready to Get <GradientText className="text-4xl md:text-5xl">Started</GradientText>?
             </h2>
-            <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-300 mb-8 leading-relaxed">
               Let's discuss your project requirements and create a custom solution that perfectly fits your business needs.
             </p>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="btn-primary text-lg px-8 py-4"
-            >
-              Start Your Project
-              <ArrowRight className="ml-2 inline" size={20} />
-            </motion.button>
-          </motion.div>
+            
+            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+              <GlowButton
+                icon={<ArrowRight className="w-5 h-5" />}
+                size="lg"
+              >
+                Start Your Project
+              </GlowButton>
+              <NeonButton
+                icon={<ArrowRight className="w-5 h-5" />}
+                size="lg"
+              >
+                View Our Portfolio
+              </NeonButton>
+            </div>
+          </AnimatedTextReveal>
         </div>
       </section>
     </div>
