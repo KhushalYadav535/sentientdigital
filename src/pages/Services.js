@@ -24,8 +24,10 @@ import { FloatingOrbs, AnimatedGrid, AnimatedTextReveal, PremiumCard, AnimatedDi
 import { PremiumBackground } from '../components/EnhancedBackground';
 import PremiumButton, { GlowButton, NeonButton } from '../components/PremiumButton';
 import PremiumDivider from '../components/PremiumDivider';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Services = () => {
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('all');
 
   const services = [
@@ -460,13 +462,34 @@ const Services = () => {
                       </div>
                     </div>
 
-                    <GlowButton
-                      icon={<ArrowRight className="w-5 h-5" />}
-                      size="md"
-                      className="w-full"
-                    >
-                      Learn More
-                    </GlowButton>
+                    {service.id === 'consulting' ? (
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <GlowButton
+                          icon={<ArrowRight className="w-5 h-5" />}
+                          size="md"
+                          className="w-full"
+                          onClick={() => navigate('/services/consulting/scoping-roi')}
+                        >
+                          Project Scoping & ROI
+                        </GlowButton>
+                        <GlowButton
+                          icon={<ArrowRight className="w-5 h-5" />}
+                          size="md"
+                          className="w-full"
+                          onClick={() => navigate('/services/consulting/future-market-insights')}
+                        >
+                          Future Market Insights
+                        </GlowButton>
+                      </div>
+                    ) : (
+                      <GlowButton
+                        icon={<ArrowRight className="w-5 h-5" />}
+                        size="md"
+                        className="w-full"
+                      >
+                        Learn More
+                      </GlowButton>
+                    )}
                   </div>
                 </PremiumCard>
               </motion.div>

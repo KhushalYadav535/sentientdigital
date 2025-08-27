@@ -103,19 +103,19 @@ const Contact = () => {
     {
       icon: Mail,
       title: 'Email Us',
-      details: ['info@sentientdigital.com', 'support@sentientdigital.com'],
+      details: ['info@sentientdigital.in'],
       color: 'from-blue-500 to-cyan-500'
     },
     {
       icon: Phone,
       title: 'Call Us',
-      details: ['+1 (555) 123-4567', '+1 (555) 987-6543'],
+      details: ['+91 9669023164'],
       color: 'from-green-500 to-emerald-500'
     },
     {
       icon: MapPin,
       title: 'Visit Us',
-      details: ['123 Tech Street', 'Digital City, DC 12345'],
+      details: ['504, Fortune Business Centre,', '165 RNT Marg, Indore 452001'],
       color: 'from-purple-500 to-pink-500'
     },
     {

@@ -13,29 +13,29 @@ const Footer = () => {
       { name: 'Cloud & Hosting', path: '/services' },
       { name: 'Cybersecurity', path: '/services' },
       { name: 'IT Consultancy', path: '/services' },
-      { name: 'AI Integration', path: '/services' },
+      { name: 'AI Integration', path: '/services/dev/genai' },
     ],
     company: [
       { name: 'About Us', path: '/about' },
       { name: 'Our Team', path: '/about' },
-      { name: 'Careers', path: '/careers' },
+      { name: 'Careers', path: '/contact' },
       { name: 'Blog', path: '/blog' },
-      { name: 'Privacy Policy', path: '/privacy' },
-      { name: 'Terms of Service', path: '/terms' },
+      { name: 'Privacy Policy', path: '/resources' },
+      { name: 'Terms of Service', path: '/resources' },
     ],
     support: [
       { name: 'Contact Us', path: '/contact' },
-      { name: 'Help Center', path: '/help' },
-      { name: 'Documentation', path: '/docs' },
-      { name: 'Status', path: '/status' },
+      { name: 'Help Center', path: '/knowledge-center' },
+      { name: 'Documentation', path: '/resources' },
+      { name: 'Status', path: '/blog' },
     ],
   };
 
   const socialLinks = [
-    { icon: Facebook, href: '#', label: 'Facebook' },
-    { icon: Twitter, href: '#', label: 'Twitter' },
-    { icon: Instagram, href: '#', label: 'Instagram' },
-    { icon: Linkedin, href: '#', label: 'LinkedIn' },
+    { icon: Facebook, href: 'https://facebook.com', label: 'Facebook' },
+    { icon: Twitter, href: 'https://twitter.com', label: 'Twitter' },
+    { icon: Instagram, href: 'https://instagram.com', label: 'Instagram' },
+    { icon: Linkedin, href: 'https://linkedin.com', label: 'LinkedIn' },
   ];
 
   return (
@@ -56,15 +56,15 @@ const Footer = () => {
               <div className="space-y-3">
                 <div className="flex items-center space-x-3 text-gray-300">
                   <Mail size={18} />
-                  <span>info@sentientdigital.com</span>
+                  <span>info@sentientdigital.in</span>
                 </div>
                 <div className="flex items-center space-x-3 text-gray-300">
                   <Phone size={18} />
-                  <span>+1 (555) 123-4567</span>
+                  <span>+91 9669023164</span>
                 </div>
                 <div className="flex items-center space-x-3 text-gray-300">
                   <MapPin size={18} />
-                  <span>123 Tech Street, Digital City, DC 12345</span>
+                  <span>504, Fortune Business Centre, 165 RNT Marg, Indore 452001</span>
                 </div>
               </div>
             </motion.div>

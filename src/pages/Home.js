@@ -169,47 +169,29 @@ const Home = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, delay: 0.3 }}
               >
-                <motion.span
-                  animate={{
-                    textShadow: [
-                      "0 0 20px rgba(59, 130, 246, 0.5)",
-                      "0 0 40px rgba(59, 130, 246, 0.8)",
-                      "0 0 20px rgba(59, 130, 246, 0.5)"
-                    ]
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                  }}
-                >
-                  Empowering Businesses with{' '}
-                </motion.span>
-                <GradientText className="text-5xl md:text-7xl lg:text-8xl">
-                  Next-Gen IT Solutions
-                </GradientText>
+                Transform Your Business Operations with{' '}
+                <GradientText className="text-5xl md:text-7xl lg:text-8xl">AI That Delivers Measurable Results</GradientText>
               </motion.h1>
               <p className="text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
-                Transform your business with cutting-edge technology solutions. 
-                We deliver innovative, scalable, and secure digital experiences that drive growth.
+                From revenue growth to cost reduction, we build AI solutions that drive outcomes you can measure within 90 days.
               </p>
             </AnimatedTextReveal>
 
             <AnimatedTextReveal delay={0.4} className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-              <Link to="/contact">
+              <Link to="/roi-calculator">
                 <GlowButton
                   icon={<ArrowRight className="w-5 h-5" />}
                   size="lg"
                 >
-                  Get Started
+                  See Your ROI Potential
                 </GlowButton>
               </Link>
-              <Link to="/about">
+              <Link to="/contact">
                 <NeonButton
                   icon={<ArrowRight className="w-5 h-5" />}
                   size="lg"
                 >
-                  Learn More
+                  Book Strategy Call
                 </NeonButton>
               </Link>
             </AnimatedTextReveal>
